@@ -58,9 +58,9 @@ const downloadActivities = async (start = 0, limit = 100) => {
    let keepGoing = true;
     allActivites.forEach(activity => {
         try {
+            keepGoing = checkValidYear(activity);
             if (keepGoing) {
                 printStatusUpdate(activity)
-                keepGoing = checkValidYear(activity);
                 downloadFile(downloadUrl(activity.activityId), `activity_${activity.activityId}.${fileFormat}`);
             }
         } catch(e) {
