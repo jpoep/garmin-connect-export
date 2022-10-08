@@ -23,7 +23,7 @@ Added improvments:
 
 // configuration constants
 
-const fileFormat = 'tcx' // also possible: tcx, gpx - not really sure what else. Zip is the safest bet, as it just downloads the source format.
+const fileFormat = 'tcx' // also possible: zip, gpx - not really sure what else. Zip is the safest bet, as it just downloads the source format.
 const yearsFrom = 2021
 const yearsTo = 2022
 
