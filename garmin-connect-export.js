@@ -20,9 +20,15 @@ Added improvments:
 * The script is no longer dependent on JQuery. 
  
 [CODE]*/
-const fileFormat = 'zip' // also possible: tcx, gpx - not really sure what else. Zip is the safest bet, as it just downloads the source format.
 
-const allActivitiesUrl = "https://connect.garmin.com/modern/proxy/activitylist-service/activities/search/activities";
+// configuration constants
+
+const fileFormat = 'tcx' // also possible: tcx, gpx - not really sure what else. Zip is the safest bet, as it just downloads the source format.
+const yearsFrom = 2021
+const yearsTo = 2022
+
+
+const allActivitiesUrl = (start, limit= 100) => `https://connect.garmin.com/modern/proxy/activitylist-service/activities/search/activities?limit=${limit}${start ? '&start=' + start : ''}`;
 const activityUrl = activityId => `https://connect.garmin.com/modern/proxy/activity-service/activity/${activityId}`
 const downloadUrl = activityId => fileFormat === 'zip' ? `https://connect.garmin.com/modern/proxy/download-service/files/activity/${activityId}`
                                                        : `https://connect.garmin.com/modern/proxy/download-service/export/${fileFormat}/activity/${activityId}`
@@ -41,17 +47,28 @@ const downloadFile = (url, filename) => {
     a.click();
 }
  
-const downloadActivities = async () => {
-   const allActivites = await ((await headeredFetch(allActivitiesUrl)).json());
+const checkValidYear = activity => {
+    let date = new Date(activity.startTimeLocal);
+    return date.getFullYear() >= yearsFrom && date.getFullYear() <= yearsTo;
+}
+
+const downloadActivities = async (start = 0, limit = 100) => {
+   const allActivites = await ((await headeredFetch(allActivitiesUrl(start, limit))).json());
+   console.log(allActivites);
+   let keepGoing = true;
     allActivites.forEach(activity => {
-        printStatusUpdate(activity)
         try {
-            downloadFile(downloadUrl(activity.activityId), `activity_${activity.activityId}.${fileFormat}`);
+            if (keepGoing) {
+                printStatusUpdate(activity)
+                keepGoing = checkValidYear(activity);
+                downloadFile(downloadUrl(activity.activityId), `activity_${activity.activityId}.${fileFormat}`);
+            }
         } catch(e) {
             console.warn(`Activity ${activity.activityId} (${activity.activityName}) couldn't be downloaded and was skipped.`);
             console.warn("If you care why: ", e)
         }
-    })
+    });
+    keepGoing && await downloadActivities(allActivites.length + start);
 }
 
 downloadActivities();
