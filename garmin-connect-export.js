@@ -25,7 +25,7 @@ Added improvments:
 
 let fileFormat = 'tcx' // also possible: zip, gpx - not really sure what else. Zip is the safest bet, as it just downloads the source format.
 let yearsFrom = 2020
-let yearsTo = 2022
+let yearsTo = 2023
 
 
 let allActivitiesUrl = (start, limit= 100) => `https://connect.garmin.com/modern/proxy/activitylist-service/activities/search/activities?limit=${limit}${start ? '&start=' + start : ''}`;
