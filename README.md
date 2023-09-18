@@ -19,7 +19,7 @@ Relativ weit oben im Script findest du drei `let`s, die angepasst werden können
 
 - `yearFrom` ist das älteste Jahr, aus dem Aktivitäten geladen werden
 - `yearTo` ist das neuste Jahr
-- Der Standard bedeutet, dass alle Aktivitäten von 2020 bis 2022 heruntergeladen werden
+- Der Standard bedeutet, dass alle Aktivitäten von 2020 bis 2023 heruntergeladen werden
 - `fileFormat` kann entweder `zip`, `tcx` oder `gpx` sein
 
 ### Das Script nochmal ausführen
@@ -45,7 +45,7 @@ Look near the top of the script to customize the first three `let`s.
 
 - `yearFrom` is the oldest year to download your activites from
 - `yearTo` is the latest year to download your activities from
-- The default means that all activities from 2020 and 2022 will be downloaded.
+- The default means that all activities from 2020 to 2023 will be downloaded.
 - `fileFormat` can be either `zip`, `tcx`, or `gpx`
 
 ### Re-running the script
