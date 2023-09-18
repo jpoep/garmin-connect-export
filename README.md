@@ -15,7 +15,7 @@ Gehe auf <https://connect.garmin.com> und logge dich mit deinem Garmin-Account e
 - Aktivitäten welcher Jahre gedownloaded werden sollen
 - Welches Dateiformat heruntergeladen wird
 
-Relativ weit oben im Script findest du drei `const`s, die angepasst werden können.
+Relativ weit oben im Script findest du drei `let`s, die angepasst werden können.
 
 - `yearFrom` ist das älteste Jahr, aus dem Aktivitäten geladen werden
 - `yearTo` ist das neuste Jahr
@@ -24,7 +24,7 @@ Relativ weit oben im Script findest du drei `const`s, die angepasst werden könn
 
 ### Das Script nochmal ausführen
 
-Wenn irgendwas schief läuft, kann der Download neugestartet werden, indem man einfach `downloadActivities()` in die Konsole eintippt. Wenn aber Konfigurationen geändert werden sollen, muss die Seite komplett neugeladen werden und das ganze Script noch einmal eingefügt werden.
+Wenn irgendwas schief läuft, kann der Download neugestartet werden, indem man einfach `downloadActivities()` in die Konsole eintippt. Auch Konfigurationen können geändert werden, indem man sie einzeln einfügt. Alternativ kann man auch einfach nochmal das ganze Script mit angepassten Einstellungen pasten.
 
 ## English
 
@@ -41,7 +41,7 @@ You can customize 2 things:
 - Which years to download activities from
 - The file format of the downloads
 
-Look near the top of the script to customize the first three `const`s. 
+Look near the top of the script to customize the first three `let`s. 
 
 - `yearFrom` is the oldest year to download your activites from
 - `yearTo` is the latest year to download your activities from
@@ -50,4 +50,4 @@ Look near the top of the script to customize the first three `const`s.
 
 ### Re-running the script
 
-In case something goes wrong, you can restart the download by typing `downloadActivites()` in your console. If you need to change any parameters, you must refresh the page and re-paste the entire script. 
+In case something goes wrong, you can restart the download by typing `downloadActivites()` in your console. If you need to change any parameters, you can simply re-paste them and then proceed to rerun `downloadActivites()`. You can also choose to simply re-paste the entire script with updated settings.
