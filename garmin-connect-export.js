@@ -23,36 +23,36 @@ Added improvments:
 
 // configuration constants
 
-const fileFormat = 'tcx' // also possible: zip, gpx - not really sure what else. Zip is the safest bet, as it just downloads the source format.
-const yearsFrom = 2020
-const yearsTo = 2022
+let fileFormat = 'tcx' // also possible: zip, gpx - not really sure what else. Zip is the safest bet, as it just downloads the source format.
+let yearsFrom = 2020
+let yearsTo = 2022
 
 
-const allActivitiesUrl = (start, limit= 100) => `https://connect.garmin.com/modern/proxy/activitylist-service/activities/search/activities?limit=${limit}${start ? '&start=' + start : ''}`;
-const activityUrl = activityId => `https://connect.garmin.com/modern/proxy/activity-service/activity/${activityId}`
-const downloadUrl = activityId => fileFormat === 'zip' ? `https://connect.garmin.com/modern/proxy/download-service/files/activity/${activityId}`
+let allActivitiesUrl = (start, limit= 100) => `https://connect.garmin.com/modern/proxy/activitylist-service/activities/search/activities?limit=${limit}${start ? '&start=' + start : ''}`;
+let activityUrl = activityId => `https://connect.garmin.com/modern/proxy/activity-service/activity/${activityId}`
+let downloadUrl = activityId => fileFormat === 'zip' ? `https://connect.garmin.com/modern/proxy/download-service/files/activity/${activityId}`
                                                        : `https://connect.garmin.com/modern/proxy/download-service/export/${fileFormat}/activity/${activityId}`
 
-const headeredFetch = async (url) => fetch(url, {headers: {"NK": "NT"}});
+let headeredFetch = async (url) => fetch(url, {headers: {"NK": "NT"}});
 
-const printStatusUpdate = activity => {
+let printStatusUpdate = activity => {
     let date = new Date(activity.startTimeLocal);
     console.log(`Downloading ${activity.activityId}... (${activity.activityName}, ${date.toLocaleDateString()})`)
 }
 
-const downloadFile = (url, filename) => {
+let downloadFile = (url, filename) => {
     const a = document.createElement('a');
     a.href = url;
     a.download = filename;
     a.click();
 }
  
-const checkValidYear = activity => {
+let checkValidYear = activity => {
     let date = new Date(activity.startTimeLocal);
     return date.getFullYear() >= yearsFrom && date.getFullYear() <= yearsTo;
 }
 
-const downloadActivities = async (start = 0, limit = 100) => {
+let downloadActivities = async (start = 0, limit = 100) => {
    const allActivites = await ((await headeredFetch(allActivitiesUrl(start, limit))).json());
    console.log(allActivites);
    let keepGoing = true;
